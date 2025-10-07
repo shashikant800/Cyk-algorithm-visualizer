@@ -1,16 +1,93 @@
-# React + Vite
+CYK Algorithm Visualizer & Personal Grammar Checker
+==================================================
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Interactive web app to learn, simulate, and visualize the Cocke–Younger–Kasami (CYK) parsing algorithm, with a Personal Grammar Checker for custom context-free grammars.
 
-Currently, two official plugins are available:
+Features
+--------
+- CYK tab with hero cards and links to resources
+- Simulator tab to input a CNF-style grammar and a word and generate the CYK table
+- Personal Grammar Checker (PGC) for natural-language-like grammars with quoted terminals
+- Visual parse tree rendered top-down using react-d3-tree, plus optional ASCII view
+- Full-page background image, clean UI with Tailwind-like utility classes
+- Floating download button to save `presentation.pdf`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Tech Stack
+----------
+- React (Vite)
+- lucide-react icons
+- react-d3-tree for parse tree visualization
 
-## React Compiler
+Getting Started
+---------------
+1) Install dependencies
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm install
+```
 
-## Expanding the ESLint configuration
+2) Run the dev server
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm run dev
+```
+
+3) Build for production
+
+```bash
+npm run build
+```
+
+4) Preview production build
+
+```bash
+npm run preview
+```
+
+Project Structure (key files)
+-----------------------------
+- `src/App.jsx` – main UI, tabs, CYK/PGC logic, Simulator, tree rendering
+- `public/bg.jpg` – app background image
+- `public/presentation.pdf` – downloadable PDF (via floating button)
+- `public/*.jpg` – team images used in About Us
+
+Usage
+-----
+CYK tab
+- Overview and links; try the hero buttons to navigate.
+
+Simulator tab
+- Grammar format (CNF-style):
+  - Binary rules: `A -> B C`
+  - Terminal rules: `A -> a` or quoted terminals: `Det -> "the" | "a"`
+- Enter a word (e.g., `ababa`) and click "Generate Table" to view the CYK matrix and acceptance.
+
+Personal Grammar Checker (PGC)
+- Default example (from attached screenshots):
+
+```
+S -> NP VP
+NP -> Det N
+VP -> V NP
+Det -> "the" | "a"
+N -> "cat" | "dog"
+V -> "chased"
+```
+
+- Enter a sentence like `the cat chased a dog` and click "Generate Table & Parse Tree".
+- The app tokenizes on spaces and supports quoted multi-word terminals.
+- The CYK table and a top-down visual parse tree will be rendered.
+
+Download Button
+---------------
+- A floating round button at bottom-right downloads `presentation.pdf`.
+
+Notes & Tips
+------------
+- Grammars should be close to CNF for CYK: binary non-terminal productions or single terminal productions.
+- For natural language examples, use quoted terminals to represent words.
+- If a valid sentence is rejected, verify that rules are truly CNF-compatible and tokens match your terminals.
+
+License
+-------
+For educational/demo use. Replace or extend as needed for your project.
