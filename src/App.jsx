@@ -7,6 +7,7 @@ import {
   XCircle,
   ArrowRight,
   FileDown,
+  Github,
 } from "lucide-react";
 import Tree from 'react-d3-tree';
 
@@ -115,10 +116,20 @@ export default function CYKAlgorithmApp() {
             if (/^[a-z]$/.test(sym)) {
               terminalsSet.add(sym);
               rules[left].push([sym]);
-            } else {
-              variablesSet.add(sym);
-              rules[left].push([sym]);
+              return;
             }
+            // Support compact uppercase pairs like AB -> split to A B
+            if (/^[A-Z]{2}$/.test(sym)) {
+              const B = sym[0];
+              const C = sym[1];
+              variablesSet.add(B);
+              variablesSet.add(C);
+              rules[left].push([B, C]);
+              return;
+            }
+            // Single symbol variable (degenerate)
+            variablesSet.add(sym);
+            rules[left].push([sym]);
             return;
           }
           if (parts.length === 2) {
@@ -361,6 +372,18 @@ export default function CYKAlgorithmApp() {
         title="Download presentation.pdf"
       >
         <FileDown className="h-6 w-6" />
+      </a>
+
+      {/* Floating GitHub Button */}
+      <a
+        href="https://github.com/shashikant800/Cyk-algorithm-visualizer"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-24 z-50 h-14 w-14 rounded-full bg-white hover:bg-gray-100 text-gray-900 shadow-xl flex items-center justify-center border border-gray-300"
+        aria-label="Open project GitHub repository"
+        title="View on GitHub"
+      >
+        <Github className="h-6 w-6" />
       </a>
       {/* Navbar */}
       <nav className="bg-white shadow-md border-b-2 border-blue-500">
@@ -615,8 +638,12 @@ export default function CYKAlgorithmApp() {
                       setParsing(true);
                       setTimeout(() => {
                         const g = parseGrammarFromText(simGrammarText);
-                        const r = cykAlgorithm(simWord, g);
-                        setResult(r);
+                        const tokens = simWord.includes(' ')
+                          ? simWord.trim().split(/\s+/)
+                          : simWord.trim().split('');
+                        const cr = cykWithPointers(tokens, g);
+                        const tree = cr.accepted ? buildParseTree(g, tokens, cr.back) : null;
+                        setResult({ accepted: cr.accepted, table: cr.table, steps: [], tree });
                         setParsing(false);
                       }, 50);
                     }}
@@ -656,20 +683,37 @@ export default function CYKAlgorithmApp() {
                             ? "String Accepted!"
                             : "String Rejected"}
                         </h3>
-                        <p
-                          className={
-                            result.accepted ? "text-green-700" : "text-red-700"
-                          }
-                        >
-                          {result.accepted
-                            ? "The string belongs to the language defined by the grammar."
-                            : "The string does not belong to the language defined by the grammar."}
+                        <p className={result.accepted ? "text-green-700" : "text-red-700"}>
+                          {result.accepted ? 'The input is derivable from the grammar.' : 'The input is not derivable from the grammar.'}
                         </p>
                       </div>
                     </div>
                   </div>
 
                   {renderTable()}
+
+                  {result.tree && (
+                    <div className="mt-6 p-4 bg-gray-50 rounded-lg border">
+                      <h4 className="font-semibold text-gray-800 mb-3">Parse Tree</h4>
+                      <div className="h-[420px] w-full bg-white rounded border">
+                        <Tree
+                          data={toD3Tree(result.tree)}
+                          orientation="vertical"
+                          translate={{ x: 300, y: 40 }}
+                          pathFunc="elbow"
+                          collapsible={false}
+                          zoom={0.8}
+                          styles={{
+                            links: { stroke: '#94a3b8' },
+                            nodes: {
+                              node: { circle: { fill: '#2563eb' }, name: { fill: '#111827', fontSize: '12px' } },
+                              leafNode: { circle: { fill: '#10b981' }, name: { fill: '#111827', fontSize: '12px' } }
+                            }
+                          }}
+                        />
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
