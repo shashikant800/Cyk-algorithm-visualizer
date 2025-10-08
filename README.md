@@ -88,6 +88,10 @@ Notes & Tips
 - For natural language examples, use quoted terminals to represent words.
 - If a valid sentence is rejected, verify that rules are truly CNF-compatible and tokens match your terminals.
 
+
 License
 -------
 For educational/demo use. Replace or extend as needed for your project.
+
+
+
