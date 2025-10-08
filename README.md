@@ -84,10 +84,29 @@ Download Button
 
 Notes & Tips
 ------------
-- Grammars should be close to CNF for CYK: binary non-terminal productions or single terminal productions.
-- For natural language examples, use quoted terminals to represent words.
-- If a valid sentence is rejected, verify that rules are truly CNF-compatible and tokens match your terminals.
+- Grammars should follow Chomsky Normal Form (CNF):
+    either:
+
+      A -> BC (two non-terminals), or
+
+      A -> a (single terminal)
+
+ - When using natural language, use quoted terminals for words.
+ - If a valid sentence is rejected, check:
+ - Grammar rules follow CNF
+ - Tokens match your terminal symbols
+  
+Contributors
+-------------
+
+Shashikant Kumar 
+Saloni Kumari 
+Divyanshi Singh
+Ketan
 
 License
 -------
 For educational/demo use. Replace or extend as needed for your project.
+
+
+
