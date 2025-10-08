@@ -320,7 +320,7 @@ export default function CYKAlgorithmApp() {
 
     const n = result.table.length;
     return (
-      <div className="overflow-x-auto mt-6">
+      <div className="table-container overflow-x-auto mt-6">
         <div className="inline-block min-w-full">
           <table className="border-collapse border border-gray-300">
             <tbody>
@@ -363,45 +363,48 @@ export default function CYKAlgorithmApp() {
       className="min-h-screen bg-cover bg-center bg-no-repeat bg-fixed"
       style={{ backgroundImage: "url('/bg.jpg')" }}
     >
-      {/* Floating Download Button */}
-      <a
-        href="/presentation.pdf"
-        download
-        className="fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full bg-white hover:bg-gray-100 text-gray-900 shadow-xl flex items-center justify-center border border-gray-300"
-        aria-label="Download presentation PDF"
-        title="Download presentation.pdf"
-      >
-        <FileDown className="h-6 w-6" />
-      </a>
+      {/* Floating Buttons */}
+      <div className="floating-buttons fixed bottom-6 right-6 z-50 flex gap-4">
+        {/* Floating Download Button */}
+        <a
+          href="/presentation.pdf"
+          download
+          className="floating-button h-14 w-14 rounded-full bg-white hover:bg-gray-100 text-gray-900 shadow-xl flex items-center justify-center border border-gray-300"
+          aria-label="Download presentation PDF"
+          title="Download presentation.pdf"
+        >
+          <FileDown className="h-6 w-6" />
+        </a>
 
-      {/* Floating GitHub Button */}
-      <a
-        href="https://github.com/shashikant800/Cyk-algorithm-visualizer"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-6 right-24 z-50 h-14 w-14 rounded-full bg-white hover:bg-gray-100 text-gray-900 shadow-xl flex items-center justify-center border border-gray-300"
-        aria-label="Open project GitHub repository"
-        title="View on GitHub"
-      >
-        <Github className="h-6 w-6" />
-      </a>
+        {/* Floating GitHub Button */}
+        <a
+          href="https://github.com/shashikant800/Cyk-algorithm-visualizer"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="floating-button h-14 w-14 rounded-full bg-white hover:bg-gray-100 text-gray-900 shadow-xl flex items-center justify-center border border-gray-300"
+          aria-label="Open project GitHub repository"
+          title="View on GitHub"
+        >
+          <Github className="h-6 w-6" />
+        </a>
+      </div>
       {/* Navbar */}
       <nav className="bg-white shadow-md border-b-2 border-blue-500">
         <div className="w-full px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <img src="/logo.png" alt="Logo" className="h-12 w-12" />
-              <h1 className="text-sm font-serif text-blue-600">
+              <h1 className="navbar-title text-sm font-serif text-blue-600">
                 CYK & Personal Grammar Checker Simulator
               </h1>
             </div>
-            <div className="flex items-center space-x-8">
+            <div className="navbar-tabs flex items-center space-x-8">
               {["CYK", "Simulator", "PGC", "RBS", "Know", "About Us"].map(
                 (tab) => (
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
-                    className={`px-4 py-2 font-serif text-lg tracking-wide transition-all ${
+                    className={`navbar-tab px-4 py-2 font-serif text-lg tracking-wide transition-all ${
                       activeTab === tab
                         ? "border-b-3 border-blue-600 text-blue-600 font-semibold"
                         : "text-gray-600 hover:text-blue-500"
@@ -419,7 +422,7 @@ export default function CYKAlgorithmApp() {
       {/* Main Content */}
       <div className="bg-black/30  w-full px-6 py-12">
         {activeTab === "CYK" && (
-          <div className="grid lg:grid-cols-2 items-start gap-0 min-h-[calc(100vh-180px)]">
+          <div className="card-grid grid lg:grid-cols-2 items-start gap-0 min-h-[calc(100vh-180px)]">
             {/* Left Hero Section */}
             <div className="flex items-center justify-center p-12 relative overflow-hidden">
               <div className="absolute inset-0 opacity-10">
@@ -577,7 +580,7 @@ export default function CYKAlgorithmApp() {
                 {result.tree && (
                   <div className="mt-6 p-4 bg-gray-50 rounded-lg border">
                     <h4 className="font-semibold text-gray-800 mb-3">Parse Tree</h4>
-                    <div className="h-[420px] w-full bg-white rounded border">
+                      <div className="parse-tree-container h-[420px] w-full bg-white rounded border">
                       <Tree
                         data={toD3Tree(result.tree)}
                         orientation="vertical"
@@ -695,7 +698,7 @@ export default function CYKAlgorithmApp() {
                   {result.tree && (
                     <div className="mt-6 p-4 bg-gray-50 rounded-lg border">
                       <h4 className="font-semibold text-gray-800 mb-3">Parse Tree</h4>
-                      <div className="h-[420px] w-full bg-white rounded border">
+                      <div className="parse-tree-container h-[420px] w-full bg-white rounded border">
                         <Tree
                           data={toD3Tree(result.tree)}
                           orientation="vertical"

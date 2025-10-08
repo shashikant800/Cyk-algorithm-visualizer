@@ -40,3 +40,149 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Responsive Design */
+
+/* Mobile (up to 640px) */
+@media (max-width: 640px) {
+  .navbar-title {
+    font-size: 0.75rem;
+  }
+  
+  .navbar-tabs {
+    gap: 0.5rem;
+  }
+  
+  .navbar-tab {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+  }
+  
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.125rem;
+  }
+  
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .floating-buttons {
+    bottom: 1rem;
+    right: 1rem;
+    gap: 0.5rem;
+  }
+  
+  .floating-button {
+    width: 3rem;
+    height: 3rem;
+  }
+  
+  .parse-tree-container {
+    height: 300px;
+  }
+  
+  .table-container {
+    overflow-x: auto;
+    font-size: 0.75rem;
+  }
+}
+
+/* Tablet (641px to 1024px) */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .navbar-title {
+    font-size: 0.875rem;
+  }
+  
+  .navbar-tabs {
+    gap: 1rem;
+  }
+  
+  .hero-title {
+    font-size: 4rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.5rem;
+  }
+  
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .parse-tree-container {
+    height: 350px;
+  }
+  
+  .table-container {
+    font-size: 0.875rem;
+  }
+}
+
+/* Desktop (1025px and up) */
+@media (min-width: 1025px) {
+  .navbar-title {
+    font-size: 1rem;
+  }
+  
+  .navbar-tabs {
+    gap: 2rem;
+  }
+  
+  .hero-title {
+    font-size: 6rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 2rem;
+  }
+  
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  
+  .parse-tree-container {
+    height: 420px;
+  }
+  
+  .table-container {
+    font-size: 1rem;
+  }
+}
+
+/* Large screens (1440px and up) */
+@media (min-width: 1440px) {
+  .hero-title {
+    font-size: 7rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 2.25rem;
+  }
+  
+  .parse-tree-container {
+    height: 500px;
+  }
+}
+
+/* Print styles */
+@media print {
+  .floating-buttons {
+    display: none;
+  }
+  
+  .navbar {
+    box-shadow: none;
+    border-bottom: 1px solid #000;
+  }
+  
+  .bg-gradient {
+    background: white !important;
+  }
+}
