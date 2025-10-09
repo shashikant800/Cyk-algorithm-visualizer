@@ -76,7 +76,7 @@ V -> "chased"
 
 - Enter a sentence like `the cat chased a dog` and click "Generate Table & Parse Tree".
 - The app tokenizes on spaces and supports quoted multi-word terminal.
-- The CYK table and a top-down visual parse tree will be rendered.
+- 
 
 Download Button
 ---------------
